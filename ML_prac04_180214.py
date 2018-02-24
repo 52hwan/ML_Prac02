@@ -10,6 +10,7 @@ from __future__ import print_function
 
 import numpy as np
 import tensorflow as tf
+import time
 
 
 tf.logging.set_verbosity(tf.logging.INFO)
@@ -111,7 +112,7 @@ def cnn_model_fn(features, labels, mode):
 
 def main(unused_argv):
     # Load trainig and eval data
-    mnist = tf.contrib.learn.datasets.load_data("mnist")
+    mnist = tf.contrib.learn.datasets.load_dataset("mnist")
 
     train_data = mnist.train.images # np.array
     train_labels = np.asarray(mnist.train.labels, dtype=np.int32)
@@ -156,4 +157,7 @@ def main(unused_argv):
 
 
 if __name__ == "__main__":
+    start_time = time.time()
     tf.app.run()
+    duration = time.time() - start_time
+    print('Elapsed time = %.3f sec' % duration)
